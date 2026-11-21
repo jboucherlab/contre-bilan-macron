@@ -46,7 +46,7 @@ h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
 header.top{padding-block:28px 8px}
 .stamp{display:inline-block;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);border:2px solid var(--red);padding:4px 10px;transform:rotate(-2deg)}
 h1{font-size:clamp(3rem,10vw,7.5rem);font-weight:900;font-stretch:72%;line-height:.88;letter-spacing:-.01em;margin-top:18px}
-h1 .strike{position:relative;color:var(--muted);font-stretch:100%;font-weight:500;font-size:.42em;display:block;margin-bottom:.1em}
+h1 .strike{position:relative;color:var(--muted);font-stretch:100%;font-weight:500;font-size:.42em;display:block;width:fit-content;margin-bottom:.1em}
 h1 .strike::after{content:"";position:absolute;left:-2%;right:-2%;top:52%;height:.11em;background:var(--red);transform:rotate(-1.5deg)}
 .lede{max-width:62ch;font-size:1.15rem;margin:22px 0 0}
 .meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-family:var(--f-mono);font-size:13px;color:var(--muted)}
@@ -54,7 +54,7 @@ h1 .strike::after{content:"";position:absolute;left:-2%;right:-2%;top:52%;height
 /* Score */
 .score{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
 .score>div{background:var(--paper);padding:18px 18px 20px}
-.score .big{font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:3.2rem;line-height:1}
+.score .big{font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:clamp(2.2rem,3.6vw,3.2rem);line-height:1;white-space:nowrap}
 .score .big.red{color:var(--red)}
 .score p{margin:6px 0 0;font-size:.95rem;color:var(--muted)}
 
@@ -129,11 +129,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .themes a{font-size:.9rem;padding:6px 12px;border:1px solid var(--rule);background:var(--paper);text-decoration:none;border-radius:999px}
 .themes a:hover{border-color:var(--red);color:var(--red)}
 .themes a[aria-current]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.tile{display:flex;flex-direction:column;text-decoration:none;color:inherit}
-.tile:hover .more,.tile:focus-visible .more{text-decoration:underline}
-.tile .more{margin-top:10px;font-family:var(--f-mono);font-size:12px;color:var(--red)}
+.tile{display:flex;flex-direction:column}
+.tile .more:hover{text-decoration:underline}
+.tile .more{margin-top:auto;padding-top:10px;text-decoration:none;font-family:var(--f-mono);font-size:12px;color:var(--red)}
 .score>.tile{background:var(--paper);padding:18px 18px 20px}
-.score>.tile:hover{background:var(--red-soft)}
+
 .card:target{outline:3px solid var(--red);outline-offset:2px}
 .anchor{margin-left:.35em;font-family:var(--f-mono);font-weight:400;font-size:.7em;color:var(--muted);text-decoration:none;opacity:.55}
 .anchor:hover,.anchor:focus-visible{opacity:1;color:var(--red)}
@@ -178,10 +178,10 @@ footer p{max-width:70ch}
   <div class="meta"><span>Données arrêtées au 21/11/2026</span><span>Toutes les sources sont publiques et citées</span><span>Site indépendant, sans lien avec l'Élysée</span></div>
 
   <div class="score">
-    <a class="tile" href="#dette"><div class="big red num">+1 338 Md€</div><p>de dette publique en plus depuis fin 2017<sup class="r"><a href="#s1" aria-label="Source 1">[1]</a></sup>. Elle atteint 3 595,5 Md€, soit 119,0 % du PIB, au 2<sup>e</sup> trimestre 2026<sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup>.</p><span class="more">Voir la fiche →</span></a>
-    <a class="tile" href="#pauvrete"><div class="big red num">9,8 M</div><p>de personnes sous le seuil de pauvreté en 2024. Le taux, 15,4 %, est le plus haut depuis le début de la série en 1996<sup class="r"><a href="#s3" aria-label="Source 3">[3]</a></sup>.</p><span class="more">Voir la fiche →</span></a>
-    <a class="tile" href="#entreprises"><div class="big red num">68 564</div><p>défaillances d'entreprises en 2025 sur 12 mois. C'est un record<sup class="r"><a href="#s4" aria-label="Source 4">[4]</a></sup>.</p><span class="more">Voir la fiche →</span></a>
-    <a class="tile" href="#chomage"><div class="big num">8,2 %</div><p>de chômage au 3<sup>e</sup> trimestre 2026, en hausse de 0,4 point sur un an<sup class="r"><a href="#s5" aria-label="Source 5">[5]</a></sup>. Le plein emploi promis pour 2027 s'éloigne<sup class="r"><a href="#s6" aria-label="Source 6">[6]</a></sup>.</p><span class="more">Voir la fiche →</span></a>
+    <div class="tile"><div class="big red num">+1 338 Md€</div><p>de dette publique en plus depuis fin 2017<sup class="r"><a href="#s1" aria-label="Source 1">[1]</a></sup>. Elle atteint 3 595,5 Md€, soit 119,0 % du PIB, au 2<sup>e</sup> trimestre 2026<sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup>.</p><a class="more" href="#dette">Voir la fiche →</a></div>
+    <div class="tile"><div class="big red num">9,8 M</div><p>de personnes sous le seuil de pauvreté en 2024. Le taux, 15,4 %, est le plus haut depuis le début de la série en 1996<sup class="r"><a href="#s3" aria-label="Source 3">[3]</a></sup>.</p><a class="more" href="#pauvrete">Voir la fiche →</a></div>
+    <div class="tile"><div class="big red num">68 564</div><p>défaillances d'entreprises en 2025 sur 12 mois. C'est un record<sup class="r"><a href="#s4" aria-label="Source 4">[4]</a></sup>.</p><a class="more" href="#entreprises">Voir la fiche →</a></div>
+    <div class="tile"><div class="big num">8,2 %</div><p>de chômage au 3<sup>e</sup> trimestre 2026, en hausse de 0,4 point sur un an<sup class="r"><a href="#s5" aria-label="Source 5">[5]</a></sup>. Le plein emploi promis pour 2027 s'éloigne<sup class="r"><a href="#s6" aria-label="Source 6">[6]</a></sup>.</p><a class="more" href="#chomage">Voir la fiche →</a></div>
   </div>
 </header>
 
