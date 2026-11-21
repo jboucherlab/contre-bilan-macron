@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="author" content="Julien Boucher">
+<meta name="description" content="Contre-expertise du bilan Macron 2017-2026 : chaque chiffre confronté à sa source officielle.">
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Le Contre-Bilan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: dossier de contre-expertise — chaque fiche oppose « ce qu'ils affichent » (barré au stylo rouge) à « ce que disent les chiffres » */
+:root{
+  --bg:#e9edf2;        /* papier administratif bleuté */
+  --paper:#f7f9fb;
+  --ink:#14213a;       /* encre marine */
+  --muted:#56627a;
+  --rule:#c4ccd8;
+  --red:#c8102e;       /* stylo de correction */
+  --red-soft:#f6d9dd;
+  --ok:#2f6f4f;
+  --bar-old:#9aa6b8;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f1624;--paper:#162032;--ink:#e6ebf3;--muted:#9aa7bd;--rule:#2b3850;
+  --red:#ff5a6e;--red-soft:#3a1d27;--ok:#6cc79a;--bar-old:#55647d;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1624;--paper:#162032;--ink:#e6ebf3;--muted:#9aa7bd;--rule:#2b3850;
+  --red:#ff5a6e;--red-soft:#3a1d27;--ok:#6cc79a;--bar-old:#55647d;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit;text-decoration-color:var(--red);text-underline-offset:2px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+.mono{font-family:var(--f-mono)}
+.num{font-variant-numeric:tabular-nums}
+
+/* En-tête */
+header.top{padding-block:28px 8px}
+.stamp{display:inline-block;font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);border:2px solid var(--red);padding:4px 10px;transform:rotate(-2deg)}
+h1{font-size:clamp(3rem,10vw,7.5rem);font-weight:900;font-stretch:72%;line-height:.88;letter-spacing:-.01em;margin-top:18px}
+h1 .strike{position:relative;color:var(--muted);font-stretch:100%;font-weight:500;font-size:.42em;display:block;margin-bottom:.1em}
+h1 .strike::after{content:"";position:absolute;left:-2%;right:-2%;top:52%;height:.11em;background:var(--red);transform:rotate(-1.5deg)}
+.lede{max-width:62ch;font-size:1.15rem;margin:22px 0 0}
+.meta{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:18px;font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+
+/* Score */
+.score{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.score>div{background:var(--paper);padding:18px 18px 20px}
+.score .big{font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:3.2rem;line-height:1}
+.score .big.red{color:var(--red)}
+.score p{margin:6px 0 0;font-size:.95rem;color:var(--muted)}
+
+/* Sections */
+section{padding-block:56px 8px}
+.kicker{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+h2{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;font-stretch:80%;line-height:1;margin-top:6px}
+.intro{max-width:65ch;color:var(--muted);margin:12px 0 0}
+
+/* Fiches */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-top:28px}
+.card{background:var(--paper);border:1px solid var(--rule);padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.card h3{font-size:1.5rem;font-weight:800;font-stretch:85%}
+.claim{font-size:.95rem;color:var(--muted);border-left:3px solid var(--rule);padding-left:12px}
+.claim b{font-weight:600;color:var(--ink);text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+.claim .tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+.fact .figure{font-family:var(--f-display);font-weight:800;font-stretch:78%;font-size:2.8rem;line-height:1;color:var(--red)}
+.fact .unit{font-family:var(--f-body);font-size:1rem;font-weight:600;color:var(--ink);margin-left:6px}
+.fact p{margin:6px 0 0}
+.bars{display:grid;gap:6px;font-family:var(--f-mono);font-size:12px}
+.bar{display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:8px}
+.bar .track{height:12px;background:transparent;position:relative}
+.bar .fill{height:100%;background:var(--bar-old)}
+.bar.now .fill{background:var(--red)}
+.bar .v{min-width:70px;text-align:right}
+.verdict{display:inline-flex;align-self:flex-start;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border:1.5px solid currentColor}
+.verdict.faux{color:var(--red);background:var(--red-soft)}
+.verdict.trompeur{color:var(--red)}
+.verdict.vrai{color:var(--ok)}
+.src{font-size:12.5px;color:var(--muted);margin-top:auto;padding-top:8px;border-top:1px dashed var(--rule)}
+
+/* Tableau correctif */
+.tablewrap{overflow-x:auto;margin-top:24px;border:1px solid var(--rule);background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:720px;font-size:.95rem}
+th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--rule)}
+th{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+td.worse{color:var(--red);font-weight:700}
+tr:last-child td{border-bottom:0}
+
+/* Liste promesses */
+.promises{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0;margin-top:24px;border-top:2px solid var(--ink)}
+.promises div{padding:16px 0 16px;border-bottom:1px solid var(--rule);padding-right:20px}
+.promises h3{font-size:1.15rem;font-weight:700;font-stretch:90%}
+.promises p{margin:4px 0 0;font-size:.95rem;color:var(--muted)}
+
+/* Méthode */
+.method{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-top:20px}
+.method p{margin:0 0 10px;max-width:65ch}
+.srclist{font-size:.92rem;padding-left:18px;margin:0}
+.srclist li{margin-bottom:6px}
+sup.r{font-family:var(--f-mono);font-size:.62em;font-weight:600;line-height:0;vertical-align:super;margin-left:1px}
+sup.r a{color:var(--red);text-decoration:none;padding:0 1px}
+sup.r a:hover{text-decoration:underline}
+.refs{columns:2 340px;column-gap:32px;font-size:.9rem;margin:20px 0 0;padding-left:28px}
+.refs li{break-inside:avoid;margin-bottom:8px;padding-left:4px}
+.refs li:target{background:var(--red-soft)}
+.refs .pub{color:var(--muted)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+[id]{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 72px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--ink)}
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--ink);color:var(--paper)}
+.navin{display:flex;align-items:center;gap:20px;min-height:52px}
+.sitenav .brand{font-family:var(--f-display);font-weight:800;font-stretch:80%;font-size:1.15rem;text-decoration:none;white-space:nowrap;color:var(--paper)}
+.sitenav ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+.sitenav ul::-webkit-scrollbar{display:none}
+.sitenav ul a{display:block;padding:8px 12px;white-space:nowrap;text-decoration:none;font-size:.9rem;color:var(--paper);opacity:.8;border-bottom:2px solid transparent}
+.sitenav ul a:hover{opacity:1}
+.sitenav ul a[aria-current]{opacity:1;border-bottom-color:var(--red)}
+.themes{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.themes a{font-size:.9rem;padding:6px 12px;border:1px solid var(--rule);background:var(--paper);text-decoration:none;border-radius:999px}
+.themes a:hover{border-color:var(--red);color:var(--red)}
+.themes a[aria-current]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tile{display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.tile:hover .more,.tile:focus-visible .more{text-decoration:underline}
+.tile .more{margin-top:10px;font-family:var(--f-mono);font-size:12px;color:var(--red)}
+.score>.tile{background:var(--paper);padding:18px 18px 20px}
+.score>.tile:hover{background:var(--red-soft)}
+.card:target{outline:3px solid var(--red);outline-offset:2px}
+.anchor{margin-left:.35em;font-family:var(--f-mono);font-weight:400;font-size:.7em;color:var(--muted);text-decoration:none;opacity:.55}
+.anchor:hover,.anchor:focus-visible{opacity:1;color:var(--red)}
+.contact{font-size:.82rem;margin-top:6px}
+.totop{font-family:var(--f-mono);font-size:12px;color:var(--muted);text-decoration:none;align-self:flex-end}
+.totop:hover{color:var(--red)}
+.backtop a{font-family:var(--f-mono);font-size:13px}
+@media (max-width:560px){.sitenav .brand{display:none}}
+.licence{border-top:2px solid var(--ink);padding-top:16px;margin-bottom:20px;color:var(--ink)}
+.licence p{margin:0 0 8px}
+footer{padding-block:48px 40px;color:var(--muted);font-size:.9rem}
+footer p{max-width:70ch}
+
+@media (max-width:480px){
+  .bar{grid-template-columns:56px 1fr auto}
+  .fact .figure{font-size:2.3rem}
+}
+@media (prefers-reduced-motion:no-preference){
+  .bar .fill{transform-origin:left;animation:grow .9s ease-out both}
+  @keyframes grow{from{transform:scaleX(.15)}to{transform:scaleX(1)}}
+}
+</style>
+</head>
+<body>
+<div id="haut"></div>
+<nav class="sitenav" aria-label="Sections">
+  <div class="wrap navin">
+    <a class="brand" href="#haut">Le Contre-Bilan</a>
+    <ul>
+      <li><a href="#themes">Les thèmes</a></li>
+      <li><a href="#tableau">2017 / aujourd'hui</a></li>
+      <li><a href="#methode-democratique">La méthode</a></li>
+      <li><a href="#methode">Vérifier</a></li>
+      <li><a href="#sources">Sources</a></li>
+    </ul>
+  </div>
+</nav>
+<header class="top wrap">
+  <span class="stamp">Contre-expertise · novembre 2026</span>
+  <h1><span class="strike">Le bilan, 2017-2027</span>Le Contre-Bilan</h1>
+  <p class="lede">Le site officiel du bilan présidentiel choisit ses indicateurs, ses dates de départ et ses comparaisons. On a repris ses chiffres un par un et on les a confrontés aux dernières données de l'Insee, de la Banque de France, des Douanes et de la DREES. Certains sont exacts. D'autres sont sortis de leur contexte. Quelques-uns sont faux. Chaque chiffre porte un numéro qui renvoie à sa source, en bas de page.</p>
+  <div class="meta"><span>Données arrêtées au 21/11/2026</span><span>Toutes les sources sont publiques et citées</span><span>Site indépendant, sans lien avec l'Élysée</span></div>
+
+  <div class="score">
+    <a class="tile" href="#dette"><div class="big red num">+1 338 Md€</div><p>de dette publique en plus depuis fin 2017<sup class="r"><a href="#s1" aria-label="Source 1">[1]</a></sup>. Elle atteint 3 595,5 Md€, soit 119,0 % du PIB, au 2<sup>e</sup> trimestre 2026<sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup>.</p><span class="more">Voir la fiche →</span></a>
+    <a class="tile" href="#pauvrete"><div class="big red num">9,8 M</div><p>de personnes sous le seuil de pauvreté en 2024. Le taux, 15,4 %, est le plus haut depuis le début de la série en 1996<sup class="r"><a href="#s3" aria-label="Source 3">[3]</a></sup>.</p><span class="more">Voir la fiche →</span></a>
+    <a class="tile" href="#entreprises"><div class="big red num">68 564</div><p>défaillances d'entreprises en 2025 sur 12 mois. C'est un record<sup class="r"><a href="#s4" aria-label="Source 4">[4]</a></sup>.</p><span class="more">Voir la fiche →</span></a>
+    <a class="tile" href="#chomage"><div class="big num">8,2 %</div><p>de chômage au 3<sup>e</sup> trimestre 2026, en hausse de 0,4 point sur un an<sup class="r"><a href="#s5" aria-label="Source 5">[5]</a></sup>. Le plein emploi promis pour 2027 s'éloigne<sup class="r"><a href="#s6" aria-label="Source 6">[6]</a></sup>.</p><span class="more">Voir la fiche →</span></a>
+  </div>
+</header>
+
+<main>
+<section class="wrap" id="fiches">
+  <div class="kicker">Les chiffres affichés, corrigés</div>
+  <h2>Ce qu'ils affichent, ce que disent les données<a class="anchor" href="#fiches" aria-label="Lien vers la section Ce qu'ils affichent, ce que disent les données">#</a></h2>
+  <p class="intro">Chaque fiche reprend une affirmation du site officiel<sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup>, puis la confronte à la source statistique. La mention « exact mais trompeur » signifie que le chiffre est juste mais que le cadrage cache l'essentiel.</p>
+
+<nav class="themes" id="themes" aria-label="Thèmes">
+    <a href="#emploi">Emploi</a>
+    <a href="#chomage">Chômage</a>
+    <a href="#pouvoir-achat">Pouvoir d'achat</a>
+    <a href="#deficit">Déficit</a>
+    <a href="#dette">Dette</a>
+    <a href="#pauvrete">Pauvreté</a>
+    <a href="#commerce">Commerce extérieur</a>
+    <a href="#industrie">Industrie</a>
+    <a href="#entreprises">Entreprises</a>
+    <a href="#hopital">Hôpital</a>
+    <a href="#fiscalite">Fiscalité</a>
+    <a href="#hollande">« 16 à 0 »</a>
+  </nav>
+
+  <div class="grid">
+
+    <article class="card" id="emploi">
+      <h3>Emploi<a class="anchor" href="#emploi" aria-label="Lien vers la fiche Emploi">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>+2,6 millions d'emplois de 2017 à 2025, un rythme sans équivalent depuis 1959</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">≈ 1/3</span><span class="unit">des créations salariées depuis 2019 sont des apprentis</span><sup class="r"><a href="#s8" aria-label="Source 8">[8]</a></sup></div>
+        <p>L'Insee compte 1,3 million d'emplois salariés créés depuis fin 2019, dont environ un tiers dû à l'essor de l'apprentissage, financé par des aides publiques<sup class="r"><a href="#s8" aria-label="Source 8">[8]</a></sup>. En 2024, l'emploi salarié n'a progressé que de 4 000 postes<sup class="r"><a href="#s9" aria-label="Source 9">[9]</a></sup>. Fin 2025, 1,6 million d'emplois reposent encore sur une aide publique<sup class="r"><a href="#s10" aria-label="Source 10">[10]</a></sup>. Le rythme « sans équivalent » ne tient pas : de fin 1996 à fin 2001, la France a créé 2,1 millions d'emplois en cinq ans<sup class="r"><a href="#s11" aria-label="Source 11">[11]</a></sup>, soit environ 430 000 par an, contre environ 325 000 par an pour 2,6 millions en huit ans.</p>
+      </div>
+      <span class="verdict faux">Comparaison fausse</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="chomage">
+      <h3>Chômage<a class="anchor" href="#chomage" aria-label="Lien vers la fiche Chômage">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>Le chômage est passé de 9,5 % en mai 2017 à son plus bas niveau depuis 40 ans</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">8,2 %</span><span class="unit">au T3 2026, et il remonte</span><sup class="r"><a href="#s5" aria-label="Source 5">[5]</a></sup></div>
+        <p>Le point bas, 7,1 % au 1<sup>er</sup> trimestre 2023<sup class="r"><a href="#s12" aria-label="Source 12">[12]</a></sup>, est derrière nous. Le taux remonte depuis : +0,4 point sur un an. Le chômage de longue durée (2,1 %) est à son plus haut depuis 2022 et celui des 15-24 ans atteint 21 %<sup class="r"><a href="#s5" aria-label="Source 5">[5]</a></sup>. Le 9,5 % du 2<sup>e</sup> trimestre 2017 est une première estimation<sup class="r"><a href="#s13" aria-label="Source 13">[13]</a></sup>, révisée ensuite à la baisse par l'Insee<sup class="r"><a href="#s14" aria-label="Source 14">[14]</a></sup> : le recul réel est donc plus faible qu'annoncé.</p>
+      </div>
+      <div class="bars" aria-label="Taux de chômage, échelle 0 à 10 %">
+        <div class="bar"><span>T2 2017</span><span class="track"><span class="fill" style="display:block;width:95%"></span></span><span class="v num">9,5 %<sup class="r"><a href="#s13" aria-label="Source 13">[13]</a></sup></span></div>
+        <div class="bar"><span>T1 2023</span><span class="track"><span class="fill" style="display:block;width:71%"></span></span><span class="v num">7,1 %<sup class="r"><a href="#s12" aria-label="Source 12">[12]</a></sup></span></div>
+        <div class="bar now"><span>T3 2026</span><span class="track"><span class="fill" style="display:block;width:82%"></span></span><span class="v num">8,2 %<sup class="r"><a href="#s5" aria-label="Source 5">[5]</a></sup></span></div>
+      </div>
+      <span class="verdict trompeur">Exact mais trompeur</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="pouvoir-achat">
+      <h3>Pouvoir d'achat<a class="anchor" href="#pouvoir-achat" aria-label="Lien vers la fiche Pouvoir d'achat">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>+6,5 % de pouvoir d'achat par unité de consommation de 2018 à 2025</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">≈ 0,8 %</span><span class="unit">par an, avec trois années de recul</span><sup class="r"><a href="#s15" aria-label="Source 15">[15]</a></sup></div>
+        <p>Le +6,5 % de l'OFCE est calculé par rapport à 2017, pas à 2018<sup class="r"><a href="#s15" aria-label="Source 15">[15]</a></sup> : le site gonfle le rythme en raccourcissant la période. Cela fait environ 0,8 % par an. Le pouvoir d'achat par unité de consommation a reculé en 2020 (−0,3 %), en 2022 (−0,3 %) et en 2025 (−0,7 %)<sup class="r"><a href="#s16" aria-label="Source 16">[16]</a></sup>. C'est une moyenne, qui intègre les gains concentrés au sommet de la distribution.</p>
+      </div>
+      <span class="verdict faux">Période fausse</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="deficit">
+      <h3>Déficit public<a class="anchor" href="#deficit" aria-label="Lien vers la fiche Déficit public">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>Un déficit ramené à 2,3 % en 2018, le plus bas depuis 2001, et la sortie de la procédure européenne</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">5,1 %</span><span class="unit">du PIB en 2025, après 5,8 % en 2024</span><sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup></div>
+        <p>Le chiffre de 2018 date de huit ans. Depuis, le déficit a presque doublé par rapport à 2017 (2,7 %)<sup class="r"><a href="#s1" aria-label="Source 1">[1]</a></sup>. Le Conseil de l'UE a ouvert une nouvelle procédure pour déficit excessif contre la France le 26 juillet 2024, après un déficit de 5,5 % en 2023<sup class="r"><a href="#s17" aria-label="Source 17">[17]</a></sup>. Se féliciter d'en être sorti en 2018 sans dire qu'on y est retourné, c'est cacher la fin de l'histoire.</p>
+      </div>
+      <div class="bars" aria-label="Déficit public en % du PIB, échelle 0 à 6 %">
+        <div class="bar"><span>2017</span><span class="track"><span class="fill" style="display:block;width:45%"></span></span><span class="v num">2,7 %<sup class="r"><a href="#s1" aria-label="Source 1">[1]</a></sup></span></div>
+        <div class="bar now"><span>2024</span><span class="track"><span class="fill" style="display:block;width:97%"></span></span><span class="v num">5,8 %<sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup></span></div>
+        <div class="bar now"><span>2025</span><span class="track"><span class="fill" style="display:block;width:85%"></span></span><span class="v num">5,1 %<sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup></span></div>
+      </div>
+      <span class="verdict trompeur">Exact mais périmé</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="dette">
+      <h3>Dette publique<a class="anchor" href="#dette" aria-label="Lien vers la fiche Dette publique">#</a></h3>
+      <div class="claim"><span class="tag">Absent du site</span>La dette n'apparaît pas parmi les indicateurs mis en avant<sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup>.</div>
+      <div class="fact">
+        <div><span class="figure num">119,0 %</span><span class="unit">du PIB au T2 2026</span><sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup></div>
+        <p>3 595,5 milliards d'euros fin juin 2026<sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup>, contre 2 257,8 milliards fin 2017 (98,5 % du PIB, après intégration de SNCF Réseau)<sup class="r"><a href="#s1" aria-label="Source 1">[1]</a></sup> : 1 338 milliards de plus. Le Covid explique une partie de la hausse, pas sa totalité : la dette a continué de grimper après 2021. Le gouvernement prévoit 121,7 % en 2027<sup class="r"><a href="#s18" aria-label="Source 18">[18]</a></sup>. Fitch et S&amp;P ont abaissé la note de la France de AA− à A+ en septembre et en octobre 2025<sup class="r"><a href="#s19" aria-label="Source 19">[19]</a></sup><sup class="r"><a href="#s20" aria-label="Source 20">[20]</a></sup>.</p>
+      </div>
+      <div class="bars" aria-label="Dette publique en milliards d'euros, échelle 0 à 3 600">
+        <div class="bar"><span>fin 2017</span><span class="track"><span class="fill" style="display:block;width:63%"></span></span><span class="v num">2 257,8<sup class="r"><a href="#s1" aria-label="Source 1">[1]</a></sup></span></div>
+        <div class="bar now"><span>T2 2026</span><span class="track"><span class="fill" style="display:block;width:100%"></span></span><span class="v num">3 595,5<sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup></span></div>
+      </div>
+      <span class="verdict faux">Omission</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="pauvrete">
+      <h3>Pauvreté<a class="anchor" href="#pauvrete" aria-label="Lien vers la fiche Pauvreté">#</a></h3>
+      <div class="claim"><span class="tag">Absent du site</span>Aucun indicateur de pauvreté ou d'inégalité n'est présenté<sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup>.</div>
+      <div class="fact">
+        <div><span class="figure num">15,4 %</span><span class="unit">de la population en 2024</span><sup class="r"><a href="#s3" aria-label="Source 3">[3]</a></sup></div>
+        <p>9,8 millions de personnes vivent sous le seuil de pauvreté, fixé à 1 337 € par mois. C'est le plus haut niveau mesuré depuis 1996, et l'intensité de la pauvreté augmente aussi<sup class="r"><a href="#s3" aria-label="Source 3">[3]</a></sup>. En 2017, le taux était de 14,1 %, soit 8,9 millions de personnes<sup class="r"><a href="#s21" aria-label="Source 21">[21]</a></sup>.</p>
+      </div>
+      <div class="bars" aria-label="Taux de pauvreté, échelle 0 à 16 %">
+        <div class="bar"><span>2017</span><span class="track"><span class="fill" style="display:block;width:88%"></span></span><span class="v num">14,1 %<sup class="r"><a href="#s21" aria-label="Source 21">[21]</a></sup></span></div>
+        <div class="bar now"><span>2024</span><span class="track"><span class="fill" style="display:block;width:96%"></span></span><span class="v num">15,4 %<sup class="r"><a href="#s3" aria-label="Source 3">[3]</a></sup></span></div>
+      </div>
+      <span class="verdict faux">Omission</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="commerce">
+      <h3>Commerce extérieur<a class="anchor" href="#commerce" aria-label="Lien vers la fiche Commerce extérieur">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>Le déficit commercial se réduit pour la troisième année consécutive</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">−69,2</span><span class="unit">Md€ en 2025, pire qu'en 2017</span><sup class="r"><a href="#s22" aria-label="Source 22">[22]</a></sup></div>
+        <p>La baisse depuis 2022 vient surtout de la facture énergétique, qui retombe après le record de −162 Md€. Hors énergie, le solde s'est encore dégradé de 2,4 Md€ en 2025<sup class="r"><a href="#s23" aria-label="Source 23">[23]</a></sup>. Le déficit reste plus lourd qu'en 2017 (−62,3 Md€)<sup class="r"><a href="#s24" aria-label="Source 24">[24]</a></sup> et qu'en 2019 (−58,1 Md€)<sup class="r"><a href="#s23" aria-label="Source 23">[23]</a></sup>.</p>
+      </div>
+      <div class="bars" aria-label="Déficit commercial en milliards d'euros, échelle 0 à 162">
+        <div class="bar"><span>2017</span><span class="track"><span class="fill" style="display:block;width:38%"></span></span><span class="v num">−62,3<sup class="r"><a href="#s24" aria-label="Source 24">[24]</a></sup></span></div>
+        <div class="bar now"><span>2022</span><span class="track"><span class="fill" style="display:block;width:100%"></span></span><span class="v num">−162<sup class="r"><a href="#s23" aria-label="Source 23">[23]</a></sup></span></div>
+        <div class="bar now"><span>2025</span><span class="track"><span class="fill" style="display:block;width:43%"></span></span><span class="v num">−69,2<sup class="r"><a href="#s22" aria-label="Source 22">[22]</a></sup></span></div>
+      </div>
+      <span class="verdict trompeur">Exact mais trompeur</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="industrie">
+      <h3>Industrie<a class="anchor" href="#industrie" aria-label="Lien vers la fiche Industrie">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>La France se réindustrialise</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">≈ 10 %</span><span class="unit">du PIB pour l'industrie manufacturière</span><sup class="r"><a href="#s25" aria-label="Source 25">[25]</a></sup></div>
+        <p>L'emploi manufacturier était encore en baisse de 0,7 % fin 2025 par rapport à fin 2019<sup class="r"><a href="#s26" aria-label="Source 26">[26]</a></sup>. L'industrie ne pèse plus que 17,9 % de l'emploi marchand non agricole et son poids continue de reculer<sup class="r"><a href="#s27" aria-label="Source 27">[27]</a></sup>.</p>
+      </div>
+      <span class="verdict trompeur">Non démontré</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="entreprises">
+      <h3>Entreprises<a class="anchor" href="#entreprises" aria-label="Lien vers la fiche Entreprises">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>Record de créations d'entreprises</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">68 564</span><span class="unit">défaillances en 2025, un record</span><sup class="r"><a href="#s4" aria-label="Source 4">[4]</a></sup></div>
+        <p>Les créations, 1,17 million en 2025, sont dopées par les micro-entrepreneurs<sup class="r"><a href="#s28" aria-label="Source 28">[28]</a></sup>. En face, les faillites atteignent un record, en hausse de 3,5 % sur un an<sup class="r"><a href="#s4" aria-label="Source 4">[4]</a></sup>. Les défaillances de grandes entreprises dépassent de 68 % leur moyenne 2010-2019<sup class="r"><a href="#s29" aria-label="Source 29">[29]</a></sup>.</p>
+      </div>
+      <span class="verdict trompeur">Exact mais trompeur</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="hopital">
+      <h3>Hôpital<a class="anchor" href="#hopital" aria-label="Lien vers la fiche Hôpital">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>Des milliards investis dans la santé avec le Ségur</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">−7 200</span><span class="unit">lits en hospitalisation complète, en 2023 et 2024 seulement</span><sup class="r"><a href="#s30" aria-label="Source 30">[30]</a></sup><sup class="r"><a href="#s31" aria-label="Source 31">[31]</a></sup></div>
+        <p>Près de 4 900 lits fermés en 2023<sup class="r"><a href="#s30" aria-label="Source 30">[30]</a></sup>, 2 300 en 2024<sup class="r"><a href="#s31" aria-label="Source 31">[31]</a></sup>, encore environ 2 000 en 2025<sup class="r"><a href="#s32" aria-label="Source 32">[32]</a></sup>. Il reste 367 100 lits fin 2024, soit 45 700 de moins qu'en 2013<sup class="r"><a href="#s31" aria-label="Source 31">[31]</a></sup>. Les revalorisations du Ségur n'ont pas stoppé les fermetures.</p>
+      </div>
+      <span class="verdict trompeur">Exact mais incomplet</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="fiscalite">
+      <h3>Fiscalité<a class="anchor" href="#fiscalite" aria-label="Lien vers la fiche Fiscalité">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>Des impôts en baisse pour tous les Français</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">ISF</span><span class="unit">supprimé en 2018, remplacé par l'IFI</span><sup class="r"><a href="#s33" aria-label="Source 33">[33]</a></sup></div>
+        <p>Avec le prélèvement forfaitaire unique de 30 % sur les revenus du capital<sup class="r"><a href="#s33" aria-label="Source 33">[33]</a></sup>, cette réforme profite surtout aux ménages les plus aisés<sup class="r"><a href="#s34" aria-label="Source 34">[34]</a></sup>. Le comité d'évaluation placé auprès de France Stratégie a constaté une forte hausse des dividendes perçus par les 0,1 % les plus fortunés<sup class="r"><a href="#s35" aria-label="Source 35">[35]</a></sup>.</p>
+      </div>
+      <span class="verdict trompeur">Inégal</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="hollande">
+      <h3>Le « 16 à 0 » contre Hollande<a class="anchor" href="#hollande" aria-label="Lien vers la fiche Le « 16 à 0 » contre Hollande">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>16 à 0 face à François Hollande, sur seize indicateurs officiels</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">0</span><span class="unit">méthode publiée</span></div>
+        <p>Le site ne publie ni les dates retenues, ni la méthode de comparaison. Sur la dette, le déficit, la pauvreté, le commerce extérieur et les faillites, la situation est moins bonne qu'en 2017 (voir le tableau ci-dessous). Un score de 16 à 0 suppose d'avoir écarté tous ces indicateurs.</p>
+      </div>
+      <span class="verdict faux">Faux</span>
+      <a class="totop" href="#themes">Tous les thèmes ↑</a>
+    </article>
+
+  </div>
+</section>
+
+<section class="wrap" id="tableau">
+  <div class="kicker">Le vrai tableau de marque</div>
+  <h2>2017 contre aujourd'hui<a class="anchor" href="#tableau" aria-label="Lien vers la section 2017 contre aujourd'hui">#</a></h2>
+  <p class="intro">Les indicateurs que le site officiel ne met pas en avant. En rouge, ceux qui se sont dégradés depuis la prise de fonctions.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Indicateur</th><th>En 2017</th><th>Dernier chiffre</th><th>Évolution</th></tr></thead>
+      <tbody>
+        <tr><td>Dette publique</td><td class="n">2 257,8 Md€ (98,5 % du PIB)<sup class="r"><a href="#s1" aria-label="Source 1">[1]</a></sup></td><td class="n">3 595,5 Md€ (119,0 %), T2 2026<sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup></td><td class="worse">+1 338 Md€</td></tr>
+        <tr><td>Déficit public</td><td class="n">2,7 % du PIB<sup class="r"><a href="#s1" aria-label="Source 1">[1]</a></sup></td><td class="n">5,1 % du PIB, 2025<sup class="r"><a href="#s2" aria-label="Source 2">[2]</a></sup></td><td class="worse">Procédure UE rouverte en 2024<sup class="r"><a href="#s17" aria-label="Source 17">[17]</a></sup></td></tr>
+        <tr><td>Taux de pauvreté</td><td class="n">14,1 % (8,9 M)<sup class="r"><a href="#s21" aria-label="Source 21">[21]</a></sup></td><td class="n">15,4 % (9,8 M), 2024<sup class="r"><a href="#s3" aria-label="Source 3">[3]</a></sup></td><td class="worse">Plus haut depuis 1996</td></tr>
+        <tr><td>Solde commercial (biens)</td><td class="n">−62,3 Md€<sup class="r"><a href="#s24" aria-label="Source 24">[24]</a></sup></td><td class="n">−69,2 Md€, 2025<sup class="r"><a href="#s22" aria-label="Source 22">[22]</a></sup></td><td class="worse">Dégradé</td></tr>
+        <tr><td>Défaillances d'entreprises</td><td class="n">moyenne 2010-2019 : 59 342<sup class="r"><a href="#s29" aria-label="Source 29">[29]</a></sup></td><td class="n">68 564, 2025<sup class="r"><a href="#s4" aria-label="Source 4">[4]</a></sup></td><td class="worse">Record</td></tr>
+        <tr><td>Note souveraine (Fitch, S&amp;P)</td><td class="n">AA− avant 2025<sup class="r"><a href="#s19" aria-label="Source 19">[19]</a></sup><sup class="r"><a href="#s20" aria-label="Source 20">[20]</a></sup></td><td class="n">A+, sept. et oct. 2025<sup class="r"><a href="#s19" aria-label="Source 19">[19]</a></sup><sup class="r"><a href="#s20" aria-label="Source 20">[20]</a></sup></td><td class="worse">Dégradée</td></tr>
+        <tr><td>Chômage (BIT)</td><td class="n">9,5 % (1<sup>re</sup> estimation)<sup class="r"><a href="#s13" aria-label="Source 13">[13]</a></sup></td><td class="n">8,2 %, T3 2026<sup class="r"><a href="#s5" aria-label="Source 5">[5]</a></sup></td><td>En baisse, mais remonte depuis 2023<sup class="r"><a href="#s12" aria-label="Source 12">[12]</a></sup></td></tr>
+        <tr><td>Pouvoir d'achat par UC</td><td class="n">base 100 en 2017<sup class="r"><a href="#s15" aria-label="Source 15">[15]</a></sup></td><td class="n">≈ 106,5 en 2025<sup class="r"><a href="#s15" aria-label="Source 15">[15]</a></sup></td><td>≈ +0,8 % par an</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="wrap" id="methode-democratique">
+  <div class="kicker">Ce que les graphiques ne montrent pas</div>
+  <h2>La méthode<a class="anchor" href="#methode-democratique" aria-label="Lien vers la section La méthode">#</a></h2>
+  <div class="promises">
+    <div><h3>Retraites à 64 ans sans vote</h3><p>La réforme de 2023 a été adoptée par l'article 49.3. Elle a dû être suspendue jusqu'en janvier 2028 par la loi de financement de la sécurité sociale pour 2026, promulguée le 30 décembre 2025<sup class="r"><a href="#s36" aria-label="Source 36">[36]</a></sup>.</p></div>
+    <div><h3>23 recours au 49.3</h3><p>Pour le seul gouvernement d'Élisabeth Borne, entre 2022 et 2024 : un record depuis Michel Rocard<sup class="r"><a href="#s37" aria-label="Source 37">[37]</a></sup>.</p></div>
+    <div><h3>Une procédure européenne</h3><p>Ouverte le 26 juillet 2024 contre la France pour déficit excessif, un mois après la dissolution de l'Assemblée<sup class="r"><a href="#s17" aria-label="Source 17">[17]</a></sup>.</p></div>
+    <div><h3>Sept Premiers ministres</h3><p>Philippe, Castex, Borne, Attal, Barnier, Bayrou et Lecornu se sont succédé à Matignon depuis 2017<sup class="r"><a href="#s38" aria-label="Source 38">[38]</a></sup>.</p></div>
+    <div><h3>Cinq réformes de l'assurance chômage</h3><p>Depuis 2017. Celle de 2023 réduit de 25 % la durée d'indemnisation des nouveaux inscrits quand la conjoncture est jugée favorable<sup class="r"><a href="#s39" aria-label="Source 39">[39]</a></sup>.</p></div>
+    <div><h3>Le plein emploi promis</h3><p>L'objectif de plein emploi affiché par le gouvernement<sup class="r"><a href="#s6" aria-label="Source 6">[6]</a></sup> n'est pas atteint : le chômage remonte à 8,2 %<sup class="r"><a href="#s5" aria-label="Source 5">[5]</a></sup>.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="methode">
+  <div class="kicker">Méthode</div>
+  <h2>Vérifiez vous-mêmes<a class="anchor" href="#methode" aria-label="Lien vers la section Vérifiez vous-mêmes">#</a></h2>
+  <div class="method">
+    <div>
+      <p>Chaque chiffre renvoie, par son numéro, à une publication officielle ou à un média qui la reprend. Les valeurs de 2017 sont celles des séries révisées, quand elles existent : la dette de fin 2017, par exemple, a été relevée de 39,4 Md€ après l'intégration de SNCF Réseau dans les comptes publics<sup class="r"><a href="#s1" aria-label="Source 1">[1]</a></sup>.</p>
+      <p>Nous ne contestons pas les chiffres exacts du site officiel : la baisse du chômage entre 2017 et 2023 et la hausse du nombre d'emplois sont réelles. Nous contestons le choix des indicateurs, des dates de départ et des comparaisons, qui laisse de côté la dette, la pauvreté, les faillites et le commerce extérieur.</p>
+    </div>
+    <div>
+      <p>Les valeurs « ≈ » sont des calculs à partir des sources citées : par exemple 0,8 % par an pour le pouvoir d'achat (+6,5 % sur huit ans), ou 1 338 Md€ de dette supplémentaire (3 595,5 − 2 257,8).</p>
+      <p>Si vous trouvez une erreur, signalez-la : elle sera corrigée.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="sources">
+  <div class="kicker">Références</div>
+  <h2>Sources<a class="anchor" href="#sources" aria-label="Lien vers la section Sources">#</a></h2>
+  <ol class="refs">
+    <li id="s1"><a href="https://www.insee.fr/fr/statistiques/fichier/3676760/TEF2019_131.pdf" target="_blank" rel="noopener">Insee, Tableaux de l&#x27;économie française 2019, fiche Dette et déficit publics (série révisée, SNCF Réseau)</a></li>
+    <li id="s2"><a href="https://www.insee.fr/fr/statistiques/9053525" target="_blank" rel="noopener">Insee, Informations rapides n° 239, dette et déficit au T2 2026, 29 sept. 2026</a></li>
+    <li id="s3"><a href="https://insee.fr/fr/statistiques/9019316" target="_blank" rel="noopener">Insee Première n° 2117, niveaux de vie et pauvreté en 2024, juil. 2026</a></li>
+    <li id="s4"><a href="https://www.banque-france.fr/fr/statistiques/entreprises/defaillances-dentreprises-2025-12" target="_blank" rel="noopener">Banque de France, Défaillances d&#x27;entreprises, décembre 2025</a></li>
+    <li id="s5"><a href="https://www.insee.fr/fr/statistiques/9118603" target="_blank" rel="noopener">Insee, Informations rapides n° 270, chômage au T3 2026, nov. 2026</a></li>
+    <li id="s6"><a href="https://travail-emploi.gouv.fr/sites/travail-emploi/files/files-spip/pdf/le_travail_et_l_emploi_depuis_2017_-_objectif_plein_emploi_-_infographie_-_mai_2023.pdf" target="_blank" rel="noopener">Ministère du Travail, « Le travail et l&#x27;emploi depuis 2017 : objectif plein emploi », mai 2023</a></li>
+    <li id="s7"><a href="https://macron-bilan.fr/" target="_blank" rel="noopener">macron-bilan.fr, « Le bilan, 2017-2027 », page d&#x27;accueil (consultée via moteur de recherche, nov. 2026)</a></li>
+    <li id="s8"><a href="https://www.insee.fr/fr/statistiques/8376822" target="_blank" rel="noopener">Insee, Emploi, chômage, revenus du travail, édition 2025, « Évolution de l&#x27;emploi »</a></li>
+    <li id="s9"><a href="https://www.insee.fr/fr/statistiques/8674669" target="_blank" rel="noopener">Insee Focus, l&#x27;emploi en 2024, déc. 2025</a></li>
+    <li id="s10"><a href="https://www.insee.fr/fr/statistiques/fichier/5234985/Dossier_de_presse-ECRT2026.pdf" target="_blank" rel="noopener">Insee, dossier de presse Emploi, chômage, revenus du travail, édition 2026</a></li>
+    <li id="s11"><a href="https://www.insee.fr/fr/statistiques/fichier/1371849/donsoc02d.pdf" target="_blank" rel="noopener">Insee, Données sociales 2002, « Le marché du travail au tournant du XXIe siècle »</a></li>
+    <li id="s12"><a href="https://www.insee.fr/fr/statistiques/7619798" target="_blank" rel="noopener">Insee, Informations rapides, chômage au T1 2023</a></li>
+    <li id="s13"><a href="https://www.insee.fr/fr/statistiques/2966612" target="_blank" rel="noopener">Insee, Informations rapides, chômage au T2 2017, 17 août 2017</a></li>
+    <li id="s14"><a href="https://insee.fr/fr/statistiques/3326105" target="_blank" rel="noopener">Insee, Informations rapides, chômage au T4 2017 (révision des T2 et T3 2017), 15 févr. 2018</a></li>
+    <li id="s15"><a href="https://fgeerolf.com/reponse-aux-decodeurs.html" target="_blank" rel="noopener">OFCE / François Geerolf, « Des salaires qui stagnent, un pouvoir d&#x27;achat qui monte », réponse aux Décodeurs</a></li>
+    <li id="s16"><a href="https://www.insee.fr/fr/statistiques/2830244" target="_blank" rel="noopener">Insee, Revenu disponible brut et pouvoir d&#x27;achat, données annuelles 1960-2025</a></li>
+    <li id="s17"><a href="https://eur-lex.europa.eu/eli/dec/2024/2122/oj" target="_blank" rel="noopener">Décision (UE) 2024/2122 du Conseil constatant l&#x27;existence d&#x27;un déficit excessif en France, 26 juil. 2024</a></li>
+    <li id="s18"><a href="https://bourse.fortuneo.fr/actualites/france-la-dette-du-2e-trimestre-revelee-mardi-avant-un-nouveau-record-en-2027-6424721" target="_blank" rel="noopener">AFP via Fortuneo, « La dette du 2e trimestre révélée mardi, avant un nouveau record en 2027 », sept. 2026</a></li>
+    <li id="s19"><a href="https://www.lafinancepourtous.com/2025/09/17/agences-de-notation-la-degradation-de-la-note-de-la-france-par-fitch-a-t-elle-un-impact/" target="_blank" rel="noopener">La finance pour tous, « Fitch dégrade la note de la France », 17 sept. 2025</a></li>
+    <li id="s20"><a href="https://www.lafinancepourtous.com/2025/10/20/agences-de-notation-sp-degrade-la-note-de-la-france-et-rejoint-fitch/" target="_blank" rel="noopener">La finance pour tous, « S&amp;P dégrade la note de la France et rejoint Fitch », 20 oct. 2025</a></li>
+    <li id="s21"><a href="https://insee.fr/fr/statistiques/4208956" target="_blank" rel="noopener">Insee Première n° 1772, « En 2017, les niveaux de vie progressent légèrement »</a></li>
+    <li id="s22"><a href="https://www.douane.gouv.fr/actualites/resultats-du-commerce-exterieur-de-la-france-pour-le-mois-de-decembre-et-pour-lannee" target="_blank" rel="noopener">Douanes, résultats du commerce extérieur pour l&#x27;année 2025, 9 févr. 2026</a></li>
+    <li id="s23"><a href="https://www.tresor.economie.gouv.fr/Articles/2026/02/06/rapport-2026-sur-le-commerce-exterieur-de-la-france" target="_blank" rel="noopener">DG Trésor, Rapport 2026 sur le commerce extérieur de la France, 6 févr. 2026</a></li>
+    <li id="s24"><a href="https://www.tresor.economie.gouv.fr/Articles/2018/02/08/commerce-exterieur-de-la-france-resultats-2017" target="_blank" rel="noopener">DG Trésor, Commerce extérieur de la France : résultats 2017, 8 févr. 2018</a></li>
+    <li id="s25"><a href="https://www.franceindustrie.org/app/uploads/2026/07/Portrait_industrie_manufacturiere_2025_vf.pdf" target="_blank" rel="noopener">France Industrie / Rexecode, Portrait de l&#x27;industrie manufacturière 2025, juil. 2026</a></li>
+    <li id="s26"><a href="https://www.insee.fr/fr/statistiques/fichier/version-html/8745332/IR53_Emploi_4T25.pdf" target="_blank" rel="noopener">Insee, Informations rapides n° 53, estimation d&#x27;emploi au T4 2025</a></li>
+    <li id="s27"><a href="https://www.economiematin.fr/?p=239053" target="_blank" rel="noopener">Économie Matin, « Industrie française : l&#x27;emploi se redresse, mais son poids continue de reculer » (d&#x27;après l&#x27;Insee), 2026</a></li>
+    <li id="s28"><a href="https://etudes-economiques.credit-agricole.com/s3-b-dj-prod-drupal-internet/s3fs-public/document/documents-2026-02/Persp26-049-France-entreprises-20260225.pdf" target="_blank" rel="noopener">Crédit Agricole, Perspectives n° 26-049, France : entreprises, 25 févr. 2026</a></li>
+    <li id="s29"><a href="https://www.banque-france.fr/system/files/2026-07/BDF-265-2_Defaillances-d_entreprises.pdf" target="_blank" rel="noopener">Bulletin de la Banque de France n° 265-2, Défaillances d&#x27;entreprises, juil. 2026</a></li>
+    <li id="s30"><a href="https://www.vie-publique.fr/en-bref/295980-hopital-nouveau-recul-du-nombre-de-lits-en-2023" target="_blank" rel="noopener">Vie-publique, « Hôpital : nouveau recul du nombre de lits en 2023 »</a></li>
+    <li id="s31"><a href="https://drees.solidarites-sante.gouv.fr/publications-communique-de-presse/etudes-et-resultats/251113_ER_etablissements-de-sante" target="_blank" rel="noopener">DREES, Études et résultats, établissements de santé en 2024, nov. 2025</a></li>
+    <li id="s32"><a href="https://www.vidal.fr/actualites/38517-hopitaux-et-cliniques-encore-2-000-lits-d-hospitalisation-perdus-en-2025-malgre-un-rebond-dans-le-public-drees.html" target="_blank" rel="noopener">Vidal, « Hôpitaux et cliniques : encore 2 000 lits d&#x27;hospitalisation perdus en 2025 » (d&#x27;après la DREES)</a></li>
+    <li id="s33"><a href="https://www.senat.fr/fileadmin/Fichiers/Images/commission/finances/Controle/PPT_ISF_IFI_PFU.pdf" target="_blank" rel="noopener">Sénat, commission des finances, contrôle ISF, IFI et PFU</a></li>
+    <li id="s34"><a href="https://www.ofce.sciences-po.fr/pdf/pbrief/2017/OFCE-Fiche5-ISF-IFI-12-07.pdf" target="_blank" rel="noopener">OFCE, Policy brief 2017, fiche 5 : ISF et IFI</a></li>
+    <li id="s35"><a href="https://lcp.fr/index%2Ephp/actualites/ce-quont-gagne-les-plus-riches-grace-la-fin-de-lisf" target="_blank" rel="noopener">LCP, « Ce qu&#x27;ont gagné les plus riches grâce à la fin de l&#x27;ISF »</a></li>
+    <li id="s36"><a href="https://www.vie-publique.fr/loi/300445-loi-de-financement-de-la-securite-sociale-2026-retraites-lfss" target="_blank" rel="noopener">Vie-publique, Loi de financement de la sécurité sociale pour 2026 (suspension de la réforme des retraites)</a></li>
+    <li id="s37"><a href="https://www.publicsenat.fr/actualites/politique/la-premiere-ministre-elisabeth-borne-a-demissionne" target="_blank" rel="noopener">Public Sénat, « La Première ministre Élisabeth Borne a démissionné », janv. 2024</a></li>
+    <li id="s38"><a href="https://www.info.gouv.fr/les-anciens-premiers-et-premieres-ministres-de-la-ve-republique/elisabeth-borne" target="_blank" rel="noopener">Gouvernement, Les anciens Premiers ministres de la Ve République</a></li>
+    <li id="s39"><a href="https://www.vie-publique.fr/questions-reponses/271537-sept-questions-sur-la-reforme-de-lassurance-chomage" target="_blank" rel="noopener">Vie-publique, « Sept questions sur la réforme de l&#x27;assurance chômage »</a></li>
+  </ol>
+</section>
+</main>
+
+<footer class="wrap">
+  <p class="backtop"><a href="#haut">Revenir en haut ↑</a></p>
+  <div class="licence" id="licence">
+    <p><strong>Le Contre-Bilan</strong>, version du 21 novembre 2026. Auteur citoyen : <span id="auteur">Julien Boucher</span>.</p>
+    <p>Ce bilan est publié sous licence <a href="https://creativecommons.org/licenses/by/4.0/deed.fr" target="_blank" rel="noopener license">Creative Commons Attribution 4.0 International (CC BY 4.0)</a>. Vous pouvez le copier, le modifier et le republier, y compris à des fins commerciales, à condition de citer l'auteur (Julien Boucher), d'indiquer la source (« Le Contre-Bilan ») avec un lien vers cette page, et de signaler si des modifications ont été faites.</p>
+    <p>Les données citées restent la propriété de leurs producteurs (Insee, Banque de France, Douanes, DREES…), qu'il faut continuer à citer.</p>
+  </div>
+  <p>Le Contre-Bilan est une page citoyenne et indépendante. Elle n'est affiliée ni à la Présidence de la République, ni au site macron-bilan.fr, ni à aucun parti. Elle n'utilise aucune image ni aucun élément graphique de ces sources.</p>
+  <p class="contact">Contact, corrections : <span class="mono">jboucherlab at gmail dot com</span></p>
+</footer>
+<script>
+(function(){try{
+var nav=[].slice.call(document.querySelectorAll(".sitenav ul a"));
+var chips=[].slice.call(document.querySelectorAll(".themes a"));
+function mark(list,id){list.forEach(function(a){if(a.getAttribute("href")==="#"+id)a.setAttribute("aria-current","true");else a.removeAttribute("aria-current")})}
+function fromHash(){var id=location.hash.slice(1);if(document.querySelector('.themes a[href="#'+id+'"]')){mark(chips,id);mark(nav,"themes")}}
+window.addEventListener("hashchange",fromHash);fromHash();
+if(!("IntersectionObserver" in window))return;
+var secs={themes:"fiches",tableau:"tableau","methode-democratique":"methode-democratique",methode:"methode",sources:"sources"};
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;for(var k in secs)if(secs[k]===e.target.id)mark(nav,k)})},{rootMargin:"-30% 0px -60% 0px"});
+for(var k in secs){var el=document.getElementById(secs[k]);if(el)io.observe(el)}
+}catch(e){}})();
+</script>
+</body>
+</html>
