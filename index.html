@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="author" content="Julien Boucher">
 <meta name="description" content="Contre-expertise du bilan Macron 2017-2026 : chaque chiffre confronté à sa source officielle.">
+<meta property="og:title" content="Le Contre-Bilan">
+<meta property="og:description" content="Le bilan Macron vérifié chiffre par chiffre, avec 61 sources officielles.">
+<meta property="og:image" content="https://jboucherlab.github.io/contre-bilan-macron/images/hero.jpg">
 <link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Le Contre-Bilan</title>
@@ -155,6 +158,48 @@ footer p{max-width:70ch}
   .bar .fill{transform-origin:left;animation:grow .9s ease-out both}
   @keyframes grow{from{transform:scaleX(.15)}to{transform:scaleX(1)}}
 }
+/* Bandeaux photo : un monde visuel sombre assumé, identique dans les deux thèmes */
+.band{position:relative;margin-top:64px;background-color:#101a2c;background-image:linear-gradient(100deg,rgba(9,15,28,.92) 0%,rgba(9,15,28,.78) 45%,rgba(9,15,28,.35) 100%),var(--img);background-size:cover;background-position:center;color:#f3f5f9}
+.band-in{padding-block:72px 28px;position:relative}
+.band .kicker{color:#ff8a98}
+.band h2{color:#fff;max-width:20ch}
+.band .intro{color:#d5dbe6;max-width:60ch}
+.band .anchor{color:#c9d1de}
+.band sup.r a{color:#ff8a98}
+.credit{margin-top:36px;font-size:11.5px;font-family:var(--f-mono);color:#b5bfcf;text-align:right}
+.credit a{color:inherit}
+.hero-band{margin-top:0}
+.hero-band .band-in{padding-block:40px 32px}
+.hero-band h1 .strike{color:#c9d1de}
+.hero-band h1{color:#fff}
+.hero-band .lede{color:#e3e8f0}
+.hero-band .meta{color:#b5bfcf}
+.hero-band .stamp{color:#ff8a98;border-color:#ff8a98}
+.hero-band sup.r a{color:#ff8a98}
+.hero-band .score{color:var(--ink)}
+/* Cartes « promesse » */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-top:28px}
+.pcard{background:var(--paper);border:1px solid var(--rule);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.phead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.ptag{font-family:var(--f-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.pbadge{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--red-soft);color:var(--red)}
+#promesses-cartes,#oubliees-liste,#scs-fiches{padding-top:24px}
+.pquote{margin:0;font-size:1.05rem;color:var(--muted);font-style:italic}
+.pcard h3{font-size:1.45rem;font-weight:800;font-stretch:82%;color:var(--red)}
+.pcard p{margin:0}
+/* Promesses oubliées */
+.olist{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;margin-top:24px;border-top:2px solid var(--ink)}
+.ocard{padding:18px 20px 20px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:6px}
+.obadge{align-self:flex-start;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--red);padding:3px 8px}
+.ocard h3{font-size:1.2rem;font-weight:700;font-stretch:88%}
+.ocard p{margin:0;color:var(--muted);font-size:.95rem}
+/* Fiches avec photo */
+.card.photo{padding-top:0}
+.cimg{margin:0 -22px;height:170px;background-color:#101a2c;background-image:linear-gradient(180deg,rgba(9,15,28,0) 40%,rgba(9,15,28,.55) 100%),var(--img);background-size:cover;background-position:center}
+.ccredit{font-family:var(--f-mono);font-size:10.5px;color:var(--muted)}
+.ccredit a{color:inherit}
+.imgcredits{font-size:.85rem;padding-left:20px;margin:12px 0 0}
+.imgcredits li{margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -165,13 +210,16 @@ footer p{max-width:70ch}
     <ul>
       <li><a href="#themes">Les thèmes</a></li>
       <li><a href="#tableau">2017 / aujourd'hui</a></li>
+      <li><a href="#promesses">Promesses</a></li>
+      <li><a href="#sport-culture-societe">Sport, culture, société</a></li>
       <li><a href="#methode-democratique">La méthode</a></li>
       <li><a href="#methode">Vérifier</a></li>
       <li><a href="#sources">Sources</a></li>
     </ul>
   </div>
 </nav>
-<header class="top wrap">
+<header class="band hero-band" style="--img:url('images/hero.jpg')">
+<div class="wrap band-in">
   <span class="stamp">Contre-expertise · novembre 2026</span>
   <h1><span class="strike">Le bilan, 2017-2027</span>Le Contre-Bilan</h1>
   <p class="lede">Le site officiel du bilan présidentiel choisit ses indicateurs, ses dates de départ et ses comparaisons. On a repris ses chiffres un par un et on les a confrontés aux dernières données de l'Insee, de la Banque de France, des Douanes et de la DREES. Certains sont exacts. D'autres sont sortis de leur contexte. Quelques-uns sont faux. Chaque chiffre porte un numéro qui renvoie à sa source, en bas de page.</p>
@@ -183,6 +231,8 @@ footer p{max-width:70ch}
     <div class="tile"><div class="big red num">68 564</div><p>défaillances d'entreprises en 2025 sur 12 mois. C'est un record<sup class="r"><a href="#s4" aria-label="Source 4">[4]</a></sup>.</p><a class="more" href="#entreprises">Voir la fiche →</a></div>
     <div class="tile"><div class="big num">8,2 %</div><p>de chômage au 3<sup>e</sup> trimestre 2026, en hausse de 0,4 point sur un an<sup class="r"><a href="#s5" aria-label="Source 5">[5]</a></sup>. Le plein emploi promis pour 2027 s'éloigne<sup class="r"><a href="#s6" aria-label="Source 6">[6]</a></sup>.</p><a class="more" href="#chomage">Voir la fiche →</a></div>
   </div>
+  <p class="credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Manifestation_contre_la_r%C3%A9forme_des_retraites,_Paris,_le_28_mars_2023_%E2%80%94_01.jpg" target="_blank" rel="noopener">Jules*</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons</p>
+</div>
 </header>
 
 <main>
@@ -387,15 +437,199 @@ footer p{max-width:70ch}
   </div>
 </section>
 
+<section class="band" id="promesses" style="--img:url('images/promesses.jpg')">
+  <div class="wrap band-in">
+    <div class="kicker">Promis en 2017. Tenu… à quel prix ?</div>
+    <h2>Des promesses tenues, dont on ne montre pas la facture<a class="anchor" href="#promesses" aria-label="Lien vers la section promesses">#</a></h2>
+    <p class="intro">Le site officiel affiche 27 promesses « tenues », chacune avec sa source<sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup>. Ses sources sont réelles. Ce qu'il ne dit pas, c'est combien ces promesses ont coûté, et qui les a payées.</p>
+    <p class="credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Pont_de_Bercy_et_Minist%C3%A8re_des_Finances.jpg" target="_blank" rel="noopener">SailEOuiAla</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons</p>
+  </div>
+</section>
+
+<section class="wrap" id="promesses-cartes">
+  <div class="pgrid">
+
+    <article class="pcard" id="taxe-habitation">
+      <div class="phead"><span class="ptag">Promis en 2017</span><span class="pbadge">« Tenu » ? À quel prix</span></div>
+      <p class="pquote">« D'ici 2020, 4 Français sur 5 ne paieront plus la taxe d'habitation sur leur résidence principale. »<sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></p>
+      <h3>La facture : 21,8 Md€ par an<sup class="r"><a href="#s36" aria-label="Source 36">[36]</a></sup><a class="anchor" href="#taxe-habitation" aria-label="Lien vers la carte taxe d'habitation">#</a></h3>
+      <p>La Cour des comptes chiffre le coût de la suppression à 21,8 milliards d'euros par an pour l'État, qui compense les communes<sup class="r"><a href="#s36" aria-label="Source 36">[36]</a></sup>. La dernière étape, au profit des 20 % de ménages les plus aisés, a coûté 5,7 Md€ de plus que prévu<sup class="r"><a href="#s36" aria-label="Source 36">[36]</a></sup>. La Cour parle d'un effet « anti-redistributif particulièrement marqué »<sup class="r"><a href="#s36" aria-label="Source 36">[36]</a></sup>. Une promesse tenue, financée à crédit.</p>
+    </article>
+
+    <article class="pcard" id="cotisations">
+      <div class="phead"><span class="ptag">Promis en 2017</span><span class="pbadge">« Tenu » ? À quel prix</span></div>
+      <p class="pquote">Suppression des cotisations salariales maladie et chômage : « +1,45 % de salaire net »<sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></p>
+      <h3>Payé par la CSG, et par les retraités<a class="anchor" href="#cotisations" aria-label="Lien vers la carte cotisations">#</a></h3>
+      <p>La contrepartie n'est pas affichée : une hausse de 1,7 point de la CSG en 2018, qui a aussi frappé les pensions, portées à un taux de 8,3 %<sup class="r"><a href="#s37" aria-label="Source 37">[37]</a></sup>. Le gouvernement a dû revenir en partie sur cette hausse pour les retraités modestes dans la loi d'urgence du 24 décembre 2018, après le mouvement des Gilets jaunes<sup class="r"><a href="#s38" aria-label="Source 38">[38]</a></sup>.</p>
+    </article>
+
+    <article class="pcard" id="demission">
+      <div class="phead"><span class="ptag">Promis en 2017</span><span class="pbadge">« Tenu » ? À quel prix</span></div>
+      <p class="pquote">« Nous ouvrirons les droits à l'assurance-chômage aux salariés qui démissionnent. »<sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></p>
+      <h3>18 000 personnes par an<a class="anchor" href="#demission" aria-label="Lien vers la carte démission">#</a></h3>
+      <p>Le droit a été réservé aux démissions avec un projet professionnel validé. Résultat : environ 12 000 nouveaux bénéficiaires en 2021, 18 000 en 2024<sup class="r"><a href="#s39" aria-label="Source 39">[39]</a></sup>, en bas de la fourchette de 17 000 à 30 000 prévue par l'étude d'impact de la loi<sup class="r"><a href="#s39" aria-label="Source 39">[39]</a></sup>. Une promesse générale devenue un dispositif de niche.</p>
+    </article>
+
+    <article class="pcard" id="impot-societes">
+      <div class="phead"><span class="ptag">Promis en 2017</span><span class="pbadge">« Tenu » ? À quel prix</span></div>
+      <p class="pquote">« Nous réduirons le taux d'impôt sur les sociétés jusqu'à la moyenne européenne de 25 %. » Le site ajoute : les recettes ont augmenté de 46 %.<sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></p>
+      <h3>Une hausse en euros courants<a class="anchor" href="#impot-societes" aria-label="Lien vers la carte impôt sur les sociétés">#</a></h3>
+      <p>Les recettes de 66 Md€ en 2017 et 97 Md€ en 2025 citées par le site sont en euros courants<sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup>. Elles ne tiennent compte ni de l'inflation de 2022-2023, ni de la hausse des bénéfices. Présenter cette hausse comme un effet de la baisse du taux, c'est confondre une coïncidence et une cause : le site ne fournit aucune étude qui la démontre.</p>
+    </article>
+
+  </div>
+</section>
+
+<section class="band" id="oubliees" style="--img:url('images/oubliees.jpg')">
+  <div class="wrap band-in">
+    <div class="kicker">Ce qui manque au compteur</div>
+    <h2>Les promesses que le site ne montre pas<a class="anchor" href="#oubliees" aria-label="Lien vers la section promesses oubliées">#</a></h2>
+    <p class="intro">Un bilan qui ne liste que les promesses tenues n'est pas un bilan. Voici celles qui manquent.</p>
+    <p class="credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Assembl%C3%A9e_Nationale_-_H%C3%A9micycle.JPG" target="_blank" rel="noopener">Sunala</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 3.0</a>, via Wikimedia Commons</p>
+  </div>
+</section>
+
+<section class="wrap" id="oubliees-liste">
+  <div class="olist">
+    <article class="ocard" id="sans-abri">
+      <span class="obadge">Non tenu</span>
+      <h3>« Plus personne dans les rues d'ici la fin de l'année »<a class="anchor" href="#sans-abri" aria-label="Lien vers sans-abri">#</a></h3>
+      <p>Promis en juillet 2017<sup class="r"><a href="#s40" aria-label="Source 40">[40]</a></sup>. En 2025, la Fondation pour le logement des défavorisés estime à 350 000 le nombre de personnes sans domicile, contre 300 000 en 2020. 912 personnes sont mortes dans la rue en 2024, 16 % de plus qu'en 2023<sup class="r"><a href="#s41" aria-label="Source 41">[41]</a></sup>.</p>
+    </article>
+    <article class="ocard" id="glyphosate">
+      <span class="obadge">Abandonné</span>
+      <h3>Sortir du glyphosate en trois ans<a class="anchor" href="#glyphosate" aria-label="Lien vers glyphosate">#</a></h3>
+      <p>Fin 2020, le président a reconnu que ce n'était « pas faisable »<sup class="r"><a href="#s42" aria-label="Source 42">[42]</a></sup>.</p>
+    </article>
+    <article class="ocard" id="fonctionnaires">
+      <span class="obadge">Abandonné</span>
+      <h3>Supprimer 120 000 postes de fonctionnaires<a class="anchor" href="#fonctionnaires" aria-label="Lien vers fonctionnaires">#</a></h3>
+      <p>Objectif abandonné en 2021 au profit d'une stabilité des effectifs<sup class="r"><a href="#s43" aria-label="Source 43">[43]</a></sup>.</p>
+    </article>
+    <article class="ocard" id="retraite-points">
+      <span class="obadge">Abandonné</span>
+      <h3>Une retraite universelle par points<a class="anchor" href="#retraite-points" aria-label="Lien vers retraite à points">#</a></h3>
+      <p>Classée parmi les promesses non tenues du premier quinquennat<sup class="r"><a href="#s44" aria-label="Source 44">[44]</a></sup>. Elle a été remplacée en 2023 par un recul de l'âge légal à 64 ans, adopté par le 49.3, puis suspendu jusqu'en 2028<sup class="r"><a href="#s45" aria-label="Source 45">[45]</a></sup>.</p>
+    </article>
+  </div>
+</section>
+
+<section class="band" id="sport-culture-societe" style="--img:url('images/scs.jpg')">
+  <div class="wrap band-in">
+    <div class="kicker">Sport, culture, société</div>
+    <h2>Les vitrines, et l'envers du décor<a class="anchor" href="#sport-culture-societe" aria-label="Lien vers la section sport, culture, société">#</a></h2>
+    <p class="intro">Le site met en avant les Jeux de Paris, Notre-Dame rouverte et le Loto du patrimoine<sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup>. Ces réussites sont réelles. Mais derrière les vitrines, les budgets reculent et les situations sociales se dégradent.</p>
+    <p class="credit">Photo : <a href="https://commons.wikimedia.org/wiki/File:2024_Summer_Olympics_and_Paralympics_cauldron_-_Vasque_Olympique_Jeux_Olympiques_Paris_2024_-_2024-09-03_(4).jpg" target="_blank" rel="noopener">Pronoia</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" target="_blank" rel="noopener">CC0</a>, via Wikimedia Commons</p>
+  </div>
+</section>
+
+<section class="wrap" id="scs-fiches">
+  <nav class="themes" aria-label="Thèmes sport, culture, société">
+    <a href="#jo">Jeux olympiques</a>
+    <a href="#sport-budget">Sport après les JO</a>
+    <a href="#pass-culture">Pass Culture</a>
+    <a href="#budget-culture">Budget culture</a>
+    <a href="#notre-dame">Notre-Dame</a>
+    <a href="#egalite">Égalité femmes-hommes</a>
+    <a href="#logement">Logement</a>
+  </nav>
+  <div class="grid">
+
+    <article class="card photo" id="jo" style="--img:url('images/jo.jpg')">
+      <div class="cimg" role="img" aria-label="La vasque olympique au jardin des Tuileries"></div>
+      <h3>Jeux olympiques<a class="anchor" href="#jo" aria-label="Lien vers la fiche Jeux olympiques">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>Les Jeux de Paris, une réussite</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">6,6 Md€</span><span class="unit">d'argent public</span><sup class="r"><a href="#s46" aria-label="Source 46">[46]</a></sup></div>
+        <p>La fête a été réussie. Mais la Cour des comptes chiffre les dépenses publiques à environ 6,6 milliards d'euros<sup class="r"><a href="#s46" aria-label="Source 46">[46]</a></sup>, alors que les documents budgétaires de 2023 en prévoyaient 2,44<sup class="r"><a href="#s46" aria-label="Source 46">[46]</a></sup>. Elle ne relève pas de dérapage, mais juge l'impact économique « modeste »<sup class="r"><a href="#s46" aria-label="Source 46">[46]</a></sup>.</p>
+      </div>
+      <span class="verdict trompeur">Réussite, facture salée</span>
+      <span class="ccredit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Vasque_Olympique_Jardin_Tuileries_-_Paris_I_(FR75)_-_2024-07-27_-_19.jpg" target="_blank" rel="noopener">Chabe01</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons</span>
+      <a class="totop" href="#scs-fiches">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="sport-budget">
+      <h3>Sport après les JO<a class="anchor" href="#sport-budget" aria-label="Lien vers la fiche sport">#</a></h3>
+      <div class="claim"><span class="tag">Promis</span><b>Un « héritage » des Jeux pour le sport de tous les jours</b></div>
+      <div class="fact">
+        <div><span class="figure num">−23 %</span><span class="unit">de crédits de paiement pour le sport en 2025</span><sup class="r"><a href="#s47" aria-label="Source 47">[47]</a></sup></div>
+        <p>Dès l'année suivant les Jeux, le programme « Sport » perd 23 % de ses crédits de paiement<sup class="r"><a href="#s47" aria-label="Source 47">[47]</a></sup>. Le Pass'Sport est réduit et recentré sur les 14-17 ans<sup class="r"><a href="#s48" aria-label="Source 48">[48]</a></sup>. L'Agence nationale du sport baisse de près de 25 % ses crédits pour les équipements<sup class="r"><a href="#s49" aria-label="Source 49">[49]</a></sup>.</p>
+      </div>
+      <span class="verdict faux">Héritage sabré</span>
+      <a class="totop" href="#scs-fiches">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="pass-culture">
+      <h3>Pass Culture<a class="anchor" href="#pass-culture" aria-label="Lien vers la fiche Pass Culture">#</a></h3>
+      <div class="claim"><span class="tag">Mesure phare</span><b>Le Pass Culture pour démocratiser l'accès à la culture</b></div>
+      <div class="fact">
+        <div><span class="figure num">244 M€</span><span class="unit">en 2024, pour un effet limité</span><sup class="r"><a href="#s50" aria-label="Source 50">[50]</a></sup></div>
+        <p>La Cour des comptes juge le dispositif coûteux et peu efficace : il renforce surtout des pratiques déjà installées<sup class="r"><a href="#s50" aria-label="Source 50">[50]</a></sup>. 84 % des jeunes l'activent, mais seulement 68 % dans les classes populaires<sup class="r"><a href="#s50" aria-label="Source 50">[50]</a></sup>. Faute de contrôles, 16 millions d'euros sont partis dans des « escape games »<sup class="r"><a href="#s50" aria-label="Source 50">[50]</a></sup>.</p>
+      </div>
+      <span class="verdict faux">Objectif manqué</span>
+      <a class="totop" href="#scs-fiches">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="budget-culture">
+      <h3>Budget de la culture<a class="anchor" href="#budget-culture" aria-label="Lien vers la fiche budget culture">#</a></h3>
+      <div class="claim"><span class="tag">Absent du site</span>Les coupes budgétaires ne sont pas mentionnées.</div>
+      <div class="fact">
+        <div><span class="figure num">−204 M€</span><span class="unit">annulés en février 2024</span><sup class="r"><a href="#s51" aria-label="Source 51">[51]</a></sup></div>
+        <p>En février 2024, 204 millions d'euros de crédits de la culture sont annulés, soit 4,6 % de la mission<sup class="r"><a href="#s51" aria-label="Source 51">[51]</a></sup>. Le décret du 25 avril 2025 en annule environ 114 millions de plus<sup class="r"><a href="#s52" aria-label="Source 52">[52]</a></sup>, une coupe dénoncée par le spectacle vivant<sup class="r"><a href="#s52" aria-label="Source 52">[52]</a></sup>.</p>
+      </div>
+      <span class="verdict faux">Omission</span>
+      <a class="totop" href="#scs-fiches">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card photo" id="notre-dame" style="--img:url('images/nd.jpg')">
+      <div class="cimg" role="img" aria-label="Notre-Dame de Paris en restauration, entourée de grues"></div>
+      <h3>Notre-Dame<a class="anchor" href="#notre-dame" aria-label="Lien vers la fiche Notre-Dame">#</a></h3>
+      <div class="claim"><span class="tag">Affiché</span><b>Notre-Dame rouverte, 1 050 monuments sauvés par le Loto du patrimoine</b><sup class="r"><a href="#s7" aria-label="Source 7">[7]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">840 M€</span><span class="unit">de dons privés</span><sup class="r"><a href="#s53" aria-label="Source 53">[53]</a></sup></div>
+        <p>La réouverture est une réussite. Elle a été financée principalement par plus de 840 millions d'euros de dons<sup class="r"><a href="#s53" aria-label="Source 53">[53]</a></sup>, encouragés par des réductions d'impôt<sup class="r"><a href="#s54" aria-label="Source 54">[54]</a></sup>. Le Loto du patrimoine est, lui, payé par les joueurs. L'État s'attribue des réussites financées par d'autres.</p>
+      </div>
+      <span class="verdict trompeur">Exact, payé par d'autres</span>
+      <span class="ccredit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Restauration_de_la_cath%C3%A9drale_Notre-Dame_%C3%A0_Paris_apr%C3%A8s_un_incendie.jpg" target="_blank" rel="noopener">Cymer51</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" target="_blank" rel="noopener">CC0</a>, via Wikimedia Commons</span>
+      <a class="totop" href="#scs-fiches">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card" id="egalite">
+      <h3>Égalité femmes-hommes<a class="anchor" href="#egalite" aria-label="Lien vers la fiche égalité">#</a></h3>
+      <div class="claim"><span class="tag">Promis</span><b>La « grande cause » du quinquennat</b><sup class="r"><a href="#s55" aria-label="Source 55">[55]</a></sup></div>
+      <div class="fact">
+        <div><span class="figure num">107</span><span class="unit">femmes tuées par leur conjoint ou ex en 2024, +11 %</span><sup class="r"><a href="#s56" aria-label="Source 56">[56]</a></sup></div>
+        <p>Il y a de vraies avancées : la PMA ouverte à toutes les femmes et l'IVG inscrite dans la Constitution en 2024<sup class="r"><a href="#s57" aria-label="Source 57">[57]</a></sup>. Mais en 2024, 107 femmes ont été tuées par leur conjoint ou ex-conjoint, 11 % de plus qu'en 2023<sup class="r"><a href="#s56" aria-label="Source 56">[56]</a></sup>. Les associations résument : « grande cause, petit bilan », faute de budget suffisant<sup class="r"><a href="#s58" aria-label="Source 58">[58]</a></sup>.</p>
+      </div>
+      <span class="verdict trompeur">Avancées réelles, moyens absents</span>
+      <a class="totop" href="#scs-fiches">Tous les thèmes ↑</a>
+    </article>
+
+    <article class="card photo" id="logement" style="--img:url('images/logement.jpg')">
+      <div class="cimg" role="img" aria-label="Tentes de sans-abri sous un pont de Paris"></div>
+      <h3>Logement<a class="anchor" href="#logement" aria-label="Lien vers la fiche logement">#</a></h3>
+      <div class="claim"><span class="tag">Absent du site</span>Le logement n'apparaît pas parmi les thèmes du bilan.</div>
+      <div class="fact">
+        <div><span class="figure num">4,2 M</span><span class="unit">de personnes mal logées</span><sup class="r"><a href="#s41" aria-label="Source 41">[41]</a></sup></div>
+        <p>350 000 personnes sans domicile en 2025, contre 300 000 en 2020<sup class="r"><a href="#s41" aria-label="Source 41">[41]</a></sup>. 912 décès dans la rue en 2024<sup class="r"><a href="#s41" aria-label="Source 41">[41]</a></sup>. Le 31<sup>e</sup> rapport sur le mal-logement juge que « tous les signaux sont au rouge »<sup class="r"><a href="#s41" aria-label="Source 41">[41]</a></sup>.</p>
+      </div>
+      <span class="verdict faux">Omission</span>
+      <span class="ccredit">Photo : <a href="https://commons.wikimedia.org/wiki/File:Campement_de_sans-abris_01.jpg" target="_blank" rel="noopener">FreCha</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons</span>
+      <a class="totop" href="#scs-fiches">Tous les thèmes ↑</a>
+    </article>
+
+  </div>
+</section>
+
 <section class="wrap" id="methode-democratique">
   <div class="kicker">Ce que les graphiques ne montrent pas</div>
   <h2>La méthode<a class="anchor" href="#methode-democratique" aria-label="Lien vers la section La méthode">#</a></h2>
   <div class="promises">
-    <div><h3>Retraites à 64 ans sans vote</h3><p>La réforme de 2023 a été adoptée par l'article 49.3. Elle a dû être suspendue jusqu'en janvier 2028 par la loi de financement de la sécurité sociale pour 2026, promulguée le 30 décembre 2025<sup class="r"><a href="#s36" aria-label="Source 36">[36]</a></sup>.</p></div>
-    <div><h3>23 recours au 49.3</h3><p>Pour le seul gouvernement d'Élisabeth Borne, entre 2022 et 2024 : un record depuis Michel Rocard<sup class="r"><a href="#s37" aria-label="Source 37">[37]</a></sup>.</p></div>
+    <div><h3>Retraites à 64 ans sans vote</h3><p>La réforme de 2023 a été adoptée par l'article 49.3. Elle a dû être suspendue jusqu'en janvier 2028 par la loi de financement de la sécurité sociale pour 2026, promulguée le 30 décembre 2025<sup class="r"><a href="#s45" aria-label="Source 45">[45]</a></sup>.</p></div>
+    <div><h3>23 recours au 49.3</h3><p>Pour le seul gouvernement d'Élisabeth Borne, entre 2022 et 2024 : un record depuis Michel Rocard<sup class="r"><a href="#s59" aria-label="Source 59">[59]</a></sup>.</p></div>
     <div><h3>Une procédure européenne</h3><p>Ouverte le 26 juillet 2024 contre la France pour déficit excessif, un mois après la dissolution de l'Assemblée<sup class="r"><a href="#s17" aria-label="Source 17">[17]</a></sup>.</p></div>
-    <div><h3>Sept Premiers ministres</h3><p>Philippe, Castex, Borne, Attal, Barnier, Bayrou et Lecornu se sont succédé à Matignon depuis 2017<sup class="r"><a href="#s38" aria-label="Source 38">[38]</a></sup>.</p></div>
-    <div><h3>Cinq réformes de l'assurance chômage</h3><p>Depuis 2017. Celle de 2023 réduit de 25 % la durée d'indemnisation des nouveaux inscrits quand la conjoncture est jugée favorable<sup class="r"><a href="#s39" aria-label="Source 39">[39]</a></sup>.</p></div>
+    <div><h3>Sept Premiers ministres</h3><p>Philippe, Castex, Borne, Attal, Barnier, Bayrou et Lecornu se sont succédé à Matignon depuis 2017<sup class="r"><a href="#s60" aria-label="Source 60">[60]</a></sup>.</p></div>
+    <div><h3>Cinq réformes de l'assurance chômage</h3><p>Depuis 2017. Celle de 2023 réduit de 25 % la durée d'indemnisation des nouveaux inscrits quand la conjoncture est jugée favorable<sup class="r"><a href="#s61" aria-label="Source 61">[61]</a></sup>.</p></div>
     <div><h3>Le plein emploi promis</h3><p>L'objectif de plein emploi affiché par le gouvernement<sup class="r"><a href="#s6" aria-label="Source 6">[6]</a></sup> n'est pas atteint : le chômage remonte à 8,2 %<sup class="r"><a href="#s5" aria-label="Source 5">[5]</a></sup>.</p></div>
   </div>
 </section>
@@ -454,11 +688,43 @@ footer p{max-width:70ch}
     <li id="s33"><a href="https://www.senat.fr/fileadmin/Fichiers/Images/commission/finances/Controle/PPT_ISF_IFI_PFU.pdf" target="_blank" rel="noopener">Sénat, commission des finances, contrôle ISF, IFI et PFU</a></li>
     <li id="s34"><a href="https://www.ofce.sciences-po.fr/pdf/pbrief/2017/OFCE-Fiche5-ISF-IFI-12-07.pdf" target="_blank" rel="noopener">OFCE, Policy brief 2017, fiche 5 : ISF et IFI</a></li>
     <li id="s35"><a href="https://lcp.fr/index%2Ephp/actualites/ce-quont-gagne-les-plus-riches-grace-la-fin-de-lisf" target="_blank" rel="noopener">LCP, « Ce qu&#x27;ont gagné les plus riches grâce à la fin de l&#x27;ISF »</a></li>
-    <li id="s36"><a href="https://www.vie-publique.fr/loi/300445-loi-de-financement-de-la-securite-sociale-2026-retraites-lfss" target="_blank" rel="noopener">Vie-publique, Loi de financement de la sécurité sociale pour 2026 (suspension de la réforme des retraites)</a></li>
-    <li id="s37"><a href="https://www.publicsenat.fr/actualites/politique/la-premiere-ministre-elisabeth-borne-a-demissionne" target="_blank" rel="noopener">Public Sénat, « La Première ministre Élisabeth Borne a démissionné », janv. 2024</a></li>
-    <li id="s38"><a href="https://www.info.gouv.fr/les-anciens-premiers-et-premieres-ministres-de-la-ve-republique/elisabeth-borne" target="_blank" rel="noopener">Gouvernement, Les anciens Premiers ministres de la Ve République</a></li>
-    <li id="s39"><a href="https://www.vie-publique.fr/questions-reponses/271537-sept-questions-sur-la-reforme-de-lassurance-chomage" target="_blank" rel="noopener">Vie-publique, « Sept questions sur la réforme de l&#x27;assurance chômage »</a></li>
+    <li id="s36"><a href="https://www.jechange.fr/banques/news/taxe-habitation-cour-des-comptes-moitie-hausse-deficit-depuis-2017" target="_blank" rel="noopener">JeChange, « 38,5 milliards par an : ce que la Cour des comptes a calculé » (taxe d&#x27;habitation), 2025</a></li>
+    <li id="s37"><a href="https://questions.assemblee-nationale.fr/dyn/15/questions/QANR5L15QE431.pdf" target="_blank" rel="noopener">Assemblée nationale, question écrite n° 431 (15e législature) : hausse de 1,7 point de la CSG et retraités</a></li>
+    <li id="s38"><a href="https://questions.assemblee-nationale.fr/dyn/15/questions/QANR5L15QE3518.pdf" target="_blank" rel="noopener">Assemblée nationale, question écrite n° 3518 (15e législature) : CSG des retraités et loi du 24 décembre 2018</a></li>
+    <li id="s39"><a href="https://www.unedic.org/publications/la-demission-pour-projet-professionnel-decembre-2024" target="_blank" rel="noopener">Unédic, « La démission pour projet professionnel », déc. 2024</a></li>
+    <li id="s40"><a href="https://www.publicsenat.fr/actualites/politique/plan-hiver-l-etat-maintient-ses-efforts-pour-les-sans-abri-les-associations-0" target="_blank" rel="noopener">Public Sénat, « Plan hiver : l&#x27;État maintient ses efforts pour les sans-abri, les associations doutent »</a></li>
+    <li id="s41"><a href="https://www.brut.media/fr/articles/600-000-personnes-hebergees-chez-des-tiers-les-signaux-sont-au-rouge-que-dit-le-rapport-sur-le-mal-logement" target="_blank" rel="noopener">Brut, « 600 000 personnes hébergées chez des tiers : que dit le rapport sur le mal-logement ? » (31e rapport de la Fondation pour le logement des défavorisés), févr. 2026</a></li>
+    <li id="s42"><a href="https://www.lalibre.be/international/europe/2022/03/19/emmanuel-macron-un-quinquennat-vert-pale-B2NYEZYH7ZAAZIHTJO7YEUMF2A/" target="_blank" rel="noopener">La Libre Belgique, « Emmanuel Macron, un quinquennat vert pâle », mars 2022</a></li>
+    <li id="s43"><a href="https://www.institutmontaigne.org/ressources/pdfs/publications/quinquennat-macron-le-gd-decryptage-action-fonction-publique.pdf" target="_blank" rel="noopener">Institut Montaigne, Quinquennat Macron : le grand décryptage, fonction publique</a></li>
+    <li id="s44"><a href="https://lcp.fr/actualites/2017-2022-le-president-a-t-il-tenu-les-engagements-du-candidat-106435" target="_blank" rel="noopener">LCP, « 2017-2022 : le Président a-t-il tenu les engagements du candidat ? »</a></li>
+    <li id="s45"><a href="https://www.vie-publique.fr/loi/300445-loi-de-financement-de-la-securite-sociale-2026-retraites-lfss" target="_blank" rel="noopener">Vie-publique, Loi de financement de la sécurité sociale pour 2026 (suspension de la réforme des retraites)</a></li>
+    <li id="s46"><a href="https://www.banquedesterritoires.fr/la-cour-des-comptes-globalement-satisfaite-du-niveau-de-depenses-publiques-de-paris-2024" target="_blank" rel="noopener">Banque des Territoires, « La Cour des comptes globalement satisfaite du niveau de dépenses publiques de Paris 2024 », sept. 2025</a></li>
+    <li id="s47"><a href="https://www.senat.fr/rap/a24-149-61/a24-149-61-syn.pdf" target="_blank" rel="noopener">Sénat, avis sur le projet de loi de finances pour 2025, programme Sport</a></li>
+    <li id="s48"><a href="https://www.assemblee-nationale.fr/dyn/17/questions/QANR5L17QE9671" target="_blank" rel="noopener">Assemblée nationale, question écrite n° 9671 : réduction du budget Pass&#x27;Sport 2025</a></li>
+    <li id="s49"><a href="https://www.banquedesterritoires.fr/lagence-nationale-du-sport-baisse-ses-credits-dequipements-de-pres-de-25" target="_blank" rel="noopener">Banque des Territoires, « L&#x27;Agence nationale du sport baisse ses crédits d&#x27;équipements de près de 25 % »</a></li>
+    <li id="s50"><a href="https://www.ccomptes.fr/fr/publications/premier-bilan-du-pass-culture" target="_blank" rel="noopener">Cour des comptes, Premier bilan du pass Culture, déc. 2024</a></li>
+    <li id="s51"><a href="https://www.assemblee-nationale.fr/dyn/17/comptes-rendus/cion-cedu/l17cion-cedu2425006_compte-rendu.pdf" target="_blank" rel="noopener">Assemblée nationale, commission des affaires culturelles, compte rendu (annulation de crédits de février 2024)</a></li>
+    <li id="s52"><a href="https://www.livreshebdo.fr/article/baisses-de-credits-de-la-culture-pas-dimpact-sur-les-engagements-budgetaires-selon-le" target="_blank" rel="noopener">Livres Hebdo, « Baisses de crédits de la culture : pas d&#x27;impact sur les engagements budgétaires selon le ministère », avr. 2025</a></li>
+    <li id="s53"><a href="https://www.sortiraparis.com/arts-culture/histoire-patrimoine/articles/261002-notre-dame-de-paris-840-millions-d-euros-de-dons-collectes-pour-les-travaux-de-restauration" target="_blank" rel="noopener">Sortir à Paris, « Notre-Dame de Paris : 840 millions d&#x27;euros de dons collectés pour les travaux de restauration »</a></li>
+    <li id="s54"><a href="https://www.publicsenat.fr/article/societe/restauration-de-notre-dame-faut-il-changer-la-fiscalite-des-dons-140254" target="_blank" rel="noopener">Public Sénat, « Restauration de Notre-Dame : faut-il changer la fiscalité des dons ? »</a></li>
+    <li id="s55"><a href="https://www.info.gouv.fr/public/index.php/grand-dossier/toutes-et-tous-egaux/un-plan-interministeriel-en-4-axes" target="_blank" rel="noopener">Gouvernement, plan interministériel « Toutes et tous égaux » 2023-2027</a></li>
+    <li id="s56"><a href="https://www.vie-publique.fr/rapport/300372-etude-nationale-sur-les-morts-violentes-au-sein-du-couple-2024" target="_blank" rel="noopener">Vie-publique, Étude nationale sur les morts violentes au sein du couple en 2024</a></li>
+    <li id="s57"><a href="https://www.info.gouv.fr/actualite/retour-sur-la-constitutionnalisation-de-livg-en-2024" target="_blank" rel="noopener">Gouvernement, « Retour sur la constitutionnalisation de l&#x27;IVG en 2024 »</a></li>
+    <li id="s58"><a href="https://equipop.org/wp-content/uploads/2022/03/Rapport_egalite_IMPR_BD.pdf" target="_blank" rel="noopener">Oxfam France, Equipop et CARE, rapport « Grande cause, petit bilan », mars 2022</a></li>
+    <li id="s59"><a href="https://www.publicsenat.fr/actualites/politique/la-premiere-ministre-elisabeth-borne-a-demissionne" target="_blank" rel="noopener">Public Sénat, « La Première ministre Élisabeth Borne a démissionné », janv. 2024</a></li>
+    <li id="s60"><a href="https://www.info.gouv.fr/les-anciens-premiers-et-premieres-ministres-de-la-ve-republique/elisabeth-borne" target="_blank" rel="noopener">Gouvernement, Les anciens Premiers ministres de la Ve République</a></li>
+    <li id="s61"><a href="https://www.vie-publique.fr/questions-reponses/271537-sept-questions-sur-la-reforme-de-lassurance-chomage" target="_blank" rel="noopener">Vie-publique, « Sept questions sur la réforme de l&#x27;assurance chômage »</a></li>
   </ol>
+  <h3 class="kicker" style="margin-top:28px">Crédits photo</h3>
+  <ul class="imgcredits">
+    <li>Photo : <a href="https://commons.wikimedia.org/wiki/File:Manifestation_contre_la_r%C3%A9forme_des_retraites,_Paris,_le_28_mars_2023_%E2%80%94_01.jpg" target="_blank" rel="noopener">Jules*</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+    <li>Photo : <a href="https://commons.wikimedia.org/wiki/File:Pont_de_Bercy_et_Minist%C3%A8re_des_Finances.jpg" target="_blank" rel="noopener">SailEOuiAla</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+    <li>Photo : <a href="https://commons.wikimedia.org/wiki/File:Assembl%C3%A9e_Nationale_-_H%C3%A9micycle.JPG" target="_blank" rel="noopener">Sunala</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 3.0</a>, via Wikimedia Commons</li>
+    <li>Photo : <a href="https://commons.wikimedia.org/wiki/File:2024_Summer_Olympics_and_Paralympics_cauldron_-_Vasque_Olympique_Jeux_Olympiques_Paris_2024_-_2024-09-03_(4).jpg" target="_blank" rel="noopener">Pronoia</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" target="_blank" rel="noopener">CC0</a>, via Wikimedia Commons</li>
+    <li>Photo : <a href="https://commons.wikimedia.org/wiki/File:Vasque_Olympique_Jardin_Tuileries_-_Paris_I_(FR75)_-_2024-07-27_-_19.jpg" target="_blank" rel="noopener">Chabe01</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+    <li>Photo : <a href="https://commons.wikimedia.org/wiki/File:Restauration_de_la_cath%C3%A9drale_Notre-Dame_%C3%A0_Paris_apr%C3%A8s_un_incendie.jpg" target="_blank" rel="noopener">Cymer51</a>, <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" target="_blank" rel="noopener">CC0</a>, via Wikimedia Commons</li>
+    <li>Photo : <a href="https://commons.wikimedia.org/wiki/File:Campement_de_sans-abris_01.jpg" target="_blank" rel="noopener">FreCha</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons</li>
+  </ul>
 </section>
 </main>
 
@@ -480,7 +746,7 @@ function mark(list,id){list.forEach(function(a){if(a.getAttribute("href")==="#"+
 function fromHash(){var id=location.hash.slice(1);if(document.querySelector('.themes a[href="#'+id+'"]')){mark(chips,id);mark(nav,"themes")}}
 window.addEventListener("hashchange",fromHash);fromHash();
 if(!("IntersectionObserver" in window))return;
-var secs={themes:"fiches",tableau:"tableau","methode-democratique":"methode-democratique",methode:"methode",sources:"sources"};
+var secs={themes:"fiches",tableau:"tableau",promesses:"promesses","sport-culture-societe":"sport-culture-societe","methode-democratique":"methode-democratique",methode:"methode",sources:"sources"};
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;for(var k in secs)if(secs[k]===e.target.id)mark(nav,k)})},{rootMargin:"-30% 0px -60% 0px"});
 for(var k in secs){var el=document.getElementById(secs[k]);if(el)io.observe(el)}
 }catch(e){}})();
